@@ -1,7 +1,6 @@
-# app/controllers/links_controller.rb
 class LinksController < ApplicationController
   skip_forgery_protection
-  before_action :authenticate!
+  before_action :authenticate!, only: [ :create ]
 
   def authenticate!
     api_key = request.headers["Authorization"].to_s.remove("Token ").strip
