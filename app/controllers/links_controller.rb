@@ -1,10 +1,19 @@
+# app/controllers/links_controller.rb
 class LinksController < ApplicationController
   skip_forgery_protection
+  before_action :authenticate!
+
+  def authenticate!
+    api_key = request.headers["Authorization"].to_s.remove("Token ").strip
+    unless api_key.present? && api_key == ENV["API_KEY"]
+      render plain: "Unauthorized", status: :unauthorized
+    end
+  end
 
   def create
     @link = Link.new(original_url: params[:original_url])
     if @link.save
-      render plain: "#{request.base_url}/#{@link.short_token}"
+      render plain: "#{request.base_url}/#{@link.short_token}\n"
     else
       render plain: "Fehler: #{@link.errors.full_messages.join(", ")}", status: 400
     end
