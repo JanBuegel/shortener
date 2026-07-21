@@ -10,6 +10,7 @@ This is a simple and powerful URL shortener built with Ruby on Rails 8. It provi
 *   **RESTful API:** A clean and simple API for creating and listing links.
 *   **CLI:** A user-friendly command-line interface for managing links.
 *   **ASCII Art:** A fun, branded experience in both the CLI and API.
+*   **Dashboard:** A basic-auth protected web page showing click statistics for every link.
 
 ## Getting Started
 
@@ -40,12 +41,14 @@ This is a simple and powerful URL shortener built with Ruby on Rails 8. It provi
     rails db:setup
     ```
 
-4.  **Configure your API key:**
+4.  **Configure your API key and dashboard login:**
 
-    Create a `.env` file in the root of the project and add your API key:
+    Create a `.env` file in the root of the project:
 
     ```
     API_KEY=your_secret_api_key
+    DASHBOARD_USERNAME=your_dashboard_username
+    DASHBOARD_PASSWORD=your_dashboard_password
     ```
 
 5.  **Start the server:**
@@ -107,6 +110,18 @@ Returns the CLI help message with a fun ASCII art banner.
 
     ```bash
     curl http://localhost:3000/cli
+    ```
+
+### Dashboard
+
+A simple statistics page listing every link, its click count, and totals.
+
+*   **Endpoint:** `GET /dashboard`
+*   **Authentication:** HTTP Basic Auth using `DASHBOARD_USERNAME` / `DASHBOARD_PASSWORD`
+*   **Example:**
+
+    ```bash
+    open http://your_dashboard_username:your_dashboard_password@localhost:3000/dashboard
     ```
 
 ### Command-Line Interface (CLI)
