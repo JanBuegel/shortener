@@ -95,6 +95,7 @@ Creates a new shortened link.
 *   **Endpoint:** `POST /links`
 *   **Authentication:** `Authorization: Token your_api_key`
 *   **Body:** `original_url=https://your-long-url.com`
+*   **Validation:** `original_url` must be a valid `http` or `https` URL (max 2048 characters). Other schemes (e.g. `javascript:`, `data:`) are rejected with a `400` response.
 *   **Example:**
 
     ```bash
@@ -150,4 +151,10 @@ Creates a new short link from the command line.
 
 ```bash
 rake shortener:create[https://your-long-url.com]
+```
+
+## Running Tests
+
+```bash
+bin/rails test
 ```
